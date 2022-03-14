@@ -1,5 +1,5 @@
-# TensorRT7-DCNv2-Plugin
-基于TensorRT7实现DCNv2插件
+# TensorRT8-DCNv2-Plugin
+基于TensorRT8实现DCNv2插件
 
 ## prerequirements
 1. TensorRT-8.2GA
@@ -12,6 +12,7 @@
 2. 将DCNv2文件夹、InferPlugin.cpp以及CMakeLists拷贝到TensorRT/plugin中
 3. 在TensorRT目录创建build目录，进入后运行
 ```
+mkdir build && cd build
 cmake .. -DBUILD_PARSERS=OFF -DBUILD_SAMPLES=OFF -DTRT_LIB_DIR=$TENSORRT_LIB_PATH -DTRT_BIN_DIR=`pwd`/out -DBUILD_PLUGINS=ON -DCUB_ROOT_DIR=$CUB_PATH
 make -j4
 ```

@@ -55,7 +55,8 @@ public:
         deserialize_value(&serialData, &serialLength, &_output_height);
         deserialize_value(&serialData, &serialLength, &_output_width);
     }
-    size_t getSerializationSize() const override {
+    size_t getSerializationSize() const noexcept override
+    {
         return (serialized_size(_in_channel) +
                 serialized_size(_out_channel) +
                 serialized_size(_kernel_H) +
@@ -71,7 +72,7 @@ public:
                 serialized_size(_output_width)
                );
     }
-    void serialize(void *buffer) const override {
+    void serialize(void *buffer) const noexcept override {
         serialize_value(&buffer, _in_channel);
         serialize_value(&buffer, _out_channel);
         serialize_value(&buffer, _kernel_H);
@@ -118,45 +119,45 @@ public:
 
     DCNv2Plugin() = delete;
 
-    const char* getPluginType() const override { return "DCNv2"; }
+    const char* getPluginType() const noexcept override { return "DCNv2"; }
 
-    const char* getPluginVersion() const override { return "001"; }
+    const char* getPluginVersion() const noexcept override { return "001"; }
 
-    void destroy() override;
+    void destroy() noexcept override;
 
-    int getNbOutputs() const override { return 1; }
+    int getNbOutputs() const noexcept override { return 1; }
 
     nvinfer1::DimsExprs getOutputDimensions(int outputIndex,
                                             const nvinfer1::DimsExprs* inputs,
                                             int nbInputs,
-                                            nvinfer1::IExprBuilder& exprBuilder) override;
-    int initialize() override;
+                                            nvinfer1::IExprBuilder& exprBuilder) noexcept override;
+    int initialize() noexcept override;
 
-    void terminate() override;
+    void terminate() noexcept override;
 
     int enqueue(const nvinfer1::PluginTensorDesc* inputDesc,
                 const nvinfer1::PluginTensorDesc* outputDesc,
                 const void* const* inputs, void* const* outputs,
-                void* workspace,  cudaStream_t stream) override;
+                void* workspace,  cudaStream_t stream) noexcept override;
 
-    size_t getWorkspaceSize(const nvinfer1::PluginTensorDesc* inputs, int nbInputs, const nvinfer1::PluginTensorDesc* outputs, int nbOutputs) const override;
+    size_t getWorkspaceSize(const nvinfer1::PluginTensorDesc* inputs, int nbInputs, const nvinfer1::PluginTensorDesc* outputs, int nbOutputs) const noexcept override;
 
-    bool supportsFormatCombination(int pos, const nvinfer1::PluginTensorDesc* inOut, int nbInputs, int nbOutputs) override;
+    bool supportsFormatCombination(int pos, const nvinfer1::PluginTensorDesc* inOut, int nbInputs, int nbOutputs) noexcept override;
 
-    nvinfer1::IPluginV2DynamicExt* clone() const override;
+    nvinfer1::IPluginV2DynamicExt* clone() const noexcept override;
 
-    void setPluginNamespace(const char* pluginNamespace) override {_plugin_namespace = pluginNamespace;};
+    void setPluginNamespace(const char* pluginNamespace) noexcept override {_plugin_namespace = pluginNamespace;};
 
-    const char* getPluginNamespace() const override {return _plugin_namespace;};
+    const char* getPluginNamespace() const noexcept override {return _plugin_namespace;};
 
-    nvinfer1::DataType getOutputDataType(int index, const nvinfer1::DataType* inputTypes, int nbInputs) const override;
+    nvinfer1::DataType getOutputDataType(int index, const nvinfer1::DataType* inputTypes, int nbInputs) const noexcept override;
 
-    void attachToContext(cudnnContext* cudnn, cublasContext* cublas, nvinfer1::IGpuAllocator* allocator) override {};
+    void attachToContext(cudnnContext* cudnn, cublasContext* cublas, nvinfer1::IGpuAllocator* allocator) noexcept override {};
 
-    void detachFromContext() override {};
+    void detachFromContext() noexcept override {};
 
     void configurePlugin(const nvinfer1::DynamicPluginTensorDesc* in, int nbInputs, 
-                         const nvinfer1::DynamicPluginTensorDesc* out, int nbOutputs) override;
+                         const nvinfer1::DynamicPluginTensorDesc* out, int nbOutputs) noexcept override;
     ~DCNv2Plugin();
 };
 
@@ -169,15 +170,15 @@ public:
 
   ~DCNv2PluginCreator() override = default;
 
-  const char* getPluginName() const override;
+  const char* getPluginName() const noexcept override;
 
-  const char* getPluginVersion() const override;
+  const char* getPluginVersion() const noexcept override;
 
-  const PluginFieldCollection* getFieldNames() override;
+  const PluginFieldCollection* getFieldNames() noexcept override;
 
-  IPluginV2DynamicExt* createPlugin(const char* name, const nvinfer1::PluginFieldCollection* fc) override;
+  IPluginV2DynamicExt* createPlugin(const char* name, const nvinfer1::PluginFieldCollection* fc) noexcept override;
 
-  IPluginV2DynamicExt* deserializePlugin(const char* name, const void* serialData, size_t serialLength) override;
+  IPluginV2DynamicExt* deserializePlugin(const char* name, const void* serialData, size_t serialLength) noexcept override;
 
 private:
   static PluginFieldCollection mFC;

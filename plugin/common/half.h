@@ -29,7 +29,7 @@
 #pragma clang diagnostic ignored "-Wmismatched-tags"
 #endif
 
-#include "ieee/half.h"
+#include "ieee_half.h"
 
 #if defined(__clang__)
 #pragma clang diagnostic pop

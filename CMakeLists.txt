@@ -128,9 +128,14 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     find_package(CUDA ${CUDA_VERSION} REQUIRED)
 endif()
 
+
+set (PARSE_INCLUDE ${PROJECT_SOURCE_DIR}/parsers/common)
+message(STATUS "PARSE_INCLUDE===========" ${PARSE_INCLUDE})
 include_directories(
     ${CUDA_INCLUDE_DIRS}
+    ${PARSE_INCLUDE}
     ${CUDNN_ROOT_DIR}/include
+
 )
 find_library(CUDNN_LIB cudnn HINTS
     ${CUDA_TOOLKIT_ROOT_DIR} ${CUDNN_ROOT_DIR} PATH_SUFFIXES lib64 lib)
