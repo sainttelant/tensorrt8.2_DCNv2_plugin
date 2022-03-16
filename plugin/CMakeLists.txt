@@ -40,8 +40,14 @@ set(PLUGIN_LISTS
     nvFasterRCNN
     batchedNMSPlugin
     flattenConcat
+    coordConvACPlugin
     cropAndResizePlugin
     proposalPlugin
+    efficientNMSPlugin
+    groupNormalizationPlugin
+    leakyReluPlugin
+    splitPlugin
+    scatterPlugin
     batchTilePlugin
     detectionLayerPlugin
     proposalLayerPlugin
